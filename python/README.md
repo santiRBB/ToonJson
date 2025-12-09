@@ -13,7 +13,7 @@ Use it to:
 
 ## Installation
 
-From PyPI (once published):
+From PyPI:
 
 ```bash
 pip install toonjson
