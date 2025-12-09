@@ -17,3 +17,10 @@ You paste JSON on the left, get TOON on the right, or do the reverse with a sing
 - Built in rotating examples for both JSON and TOON to quickly test the format in different scenarios
 
 The app is fully client side, uses no backend and does not send your data anywhere. You can host it on any static site provider.
+
+## Support
+
+If this project saves you some tokens or time and you want to say thanks:
+
+👉 https://www.buymeacoffee.com/santirbb
+[Buy me a beer](https://www.buymeacoffee.com/santirbb)

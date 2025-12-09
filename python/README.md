@@ -26,13 +26,6 @@ cd python
 pip install .
 ```
 
-## Support
-
-If this library saves you some tokens or time and you want to say thanks:
-
-👉 https://www.buymeacoffee.com/santirbb
-[Buy me a beer](https://www.buymeacoffee.com/santirbb)
-
 ## Quick start
 
 ```python
@@ -96,8 +89,6 @@ json_to_toon(data, mode="jsonlike")
 
 Detects tabular arrays (list[dict] with consistent keys).
 
-Renders them as label[n]{col1,col2,...}: TOON tables (e.g. users[3]{id,name}:).
-
 Strings with commas are quoted, others are left bare.
 
 **strict**
@@ -138,7 +129,7 @@ Behaviour:
 
 - When only items[...] is used at top level, it returns a plain list:
 
-```python
+```text
   items[3]{id,name,role}:
     1,Alice,admin
     2,Bob,user
@@ -177,3 +168,10 @@ else:
     toon = json_to_toon(text, mode=args.mode)
     print(toon)
 ```
+
+## Support
+
+If this library saves you some tokens or time and you want to say thanks:
+
+👉 https://www.buymeacoffee.com/santirbb
+[Buy me a beer](https://www.buymeacoffee.com/santirbb)
