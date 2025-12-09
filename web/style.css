@@ -1,0 +1,482 @@
+/* --- Global Reset & Variables --- */
+:root {
+  --bg-color: #0f172a;       /* Deep Slate Blue (Dark Mode Background) */
+  --panel-bg: #1e293b;       /* Lighter Slate for Panels */
+  --text-color: #e2e8f0;     /* Off-white text */
+  --accent-color: #38bdf8;   /* Sky Blue for actions */
+  --accent-hover: #0ea5e9;   /* Darker Blue for hover */
+  --border-color: #334155;   /* Subtle borders */
+  --success-color: #22c55e;  /* Green for positive metrics */
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header --- */
+header {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(15, 23, 42, 0.8); /* Slight transparency */
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Clickable logo */
+.logo-link {
+  text-decoration: none;
+}
+
+.logo-arrow {
+  color: #94a3b8;
+}
+
+/* --- Main Split Layout --- */
+main {
+  display: flex;
+  flex: 1; /* Takes up remaining height */
+  padding: 1rem;
+  gap: 1rem;
+  height: calc(100vh - 70px); /* Subtract header height */
+  overflow: hidden; /* Prevent double scrollbars */
+}
+
+/* --- Panels (Input & Output) --- */
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--panel-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 0.75rem 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.panel-header-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* --- Text Editors --- */
+textarea {
+  flex: 1; /* Fills the space between header and footer */
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+}
+
+textarea::placeholder {
+  color: #475569;
+}
+
+/* --- Panel Footer (Status Bar) --- */
+.panel-footer {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: #64748b; /* Muted text color */
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1.5rem; /* Space between metrics */
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+.panel-footer span {
+  display: flex;
+  gap: 0.3rem;
+}
+
+/* --- Middle Controls (Vertical strip in desktop) --- */
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Mode selector block */
+.mode-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+}
+
+.mode-selector label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.mode-selector select {
+  background-color: #020617;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* --- Buttons --- */
+button,
+a.btn-primary,
+a.btn-secondary {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #0f172a;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: #94a3b8;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  color: var(--text-color);
+  background-color: rgba(56, 189, 248, 0.1);
+}
+
+/* --- Metrics & Badges --- */
+.metrics {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.badge-success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--success-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.copy-msg {
+  display: none;
+  color: var(--success-color);
+  font-size: 0.75rem;
+}
+
+/* =========================================
+ About Page & Navigation
+ ========================================= */
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-item {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--accent-color);
+}
+
+/* About Page Container */
+.content-page {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column; /* Stack content vertically */
+}
+
+.article {
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.article h2 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.article h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.article p {
+  margin-bottom: 1rem;
+}
+
+.article code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  color: #fca5a5;
+}
+
+/* Comparison Boxes (Side by Side code snippets) */
+.comparison {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.cmp-box {
+  flex: 1;
+  background: var(--panel-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.cmp-box h4 {
+  margin-bottom: 0.5rem;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.cmp-box pre {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  white-space: pre-wrap; /* Wrap long lines if needed */
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid var(--border-color);
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.comparison-table th {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--accent-color);
+}
+
+/* Call to Action Section */
+.cta-section {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 12px;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Divider line on About page */
+.divider {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+/* Stats grid (token savings / accuracy) */
+.stats-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Only center the items in the Stats Grid (the colored boxes) */
+.stats-grid li {
+  text-align: center;
+}
+
+/* Ensure other lists (like History) behave normally */
+.article ul {
+  text-align: left;
+}
+
+/* History list styling */
+.history-list {
+  margin-left: 1.5rem;
+  color: #94a3b8;
+  list-style-type: disc;
+}
+
+/* Note under comparison boxes */
+.comparison-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--success-color);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Lead paragraph on About page */
+.lead {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  margin-bottom: 2rem;
+}
+
+/* --- Button: Buy Me a Beer --- */
+.btn-beer {
+  background-color: #f59e0b; /* Amber/Beer Color */
+  color: #0f172a; /* Dark text for contrast */
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #d97706; /* Slightly darker border */
+}
+
+.btn-beer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); /* Amber Glow */
+  background-color: #fbbf24; /* Brighter on hover */
+}
+
+.btn-beer svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  main {
+      flex-direction: column;
+      height: auto;
+      overflow-y: auto; /* Enable scroll on mobile */
+  }
+
+  .controls {
+      flex-direction: row;
+      padding: 0.5rem 0;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+  }
+
+  .mode-selector {
+      flex-basis: 100%;
+      align-items: center;
+  }
+
+  textarea {
+      min-height: 250px;
+  }
+
+  /* Mobile Nav Tweaks */
+  .nav-links {
+      gap: 0.8rem;
+  }
+
+  /* Stack comparison boxes on mobile */
+  .comparison {
+      flex-direction: column;
+  }
+}
+
+/* Update Mobile Tweaks for Beer */
+@media (max-width: 768px) {
+  .btn-beer span {
+      display: none; /* Hide text on mobile */
+  }
+  .btn-beer::after {
+      content: "🍺"; /* Beer Emoji for mobile fallback */
+  }
+}

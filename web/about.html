@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TOON | The Future of AI Data Formats</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>JSON <span class="logo-arrow">⬌</span> TOON</h1>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">Converter</a>
+            <a href="about.html" class="nav-item active">What is TOON?</a>
+            <a href="https://www.buymeacoffee.com/santirbb" target="_blank" rel="noopener noreferrer" class="btn-beer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 11h1a3 3 0 0 1 0 6h-1"></path>
+                    <path d="M9 13v6"></path>
+                    <path d="M13 13v6"></path>
+                    <path d="M7 10v9a3 3 0 0 0 3 3h3a3 3 0 0 0 3-3v-9"></path>
+                    <path d="M7 10V6a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v4"></path>
+                </svg>
+                <span>Buy me a beer</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="content-page">
+        <div class="article">
+            <span class="badge-success">New Standard</span>
+            <h2>Bye Bye JSON, Hello TOON</h2>
+            <p class="lead">
+                <strong>TOON (Token-Oriented Object Notation)</strong> is a data format designed
+                specifically for the AI era. While JSON is the king of web APIs, it is incredibly wasteful when
+                communicating with Large Language Models (LLMs).
+            </p>
+
+            <p>
+                Every quote <code>"</code>, brace <code>{</code>, and repeated key in JSON counts as a token. And since
+                LLMs charge by the token, JSON is literally costing you money.
+            </p>
+
+            <hr class="divider">
+
+            <h3>The "Tabular" Advantage</h3>
+            <p>
+                TOON combines the best of <strong>YAML</strong> (clean indentation) and <strong>CSV</strong> (tabular
+                data). The biggest savings come from uniform arrays. Instead of repeating keys for every single item,
+                TOON defines the header once.
+            </p>
+
+            <div class="comparison">
+                <div class="cmp-box">
+                    <h4>JSON (~180 Tokens)</h4>
+                    <pre>[
+    { "id": 1, "name": "Alice", "role": "admin" },
+    { "id": 2, "name": "Bob", "role": "user" },
+    { "id": 3, "name": "Charlie", "role": "user" }
+]</pre>
+                </div>
+                <div class="cmp-box">
+                    <h4>TOON (~85 Tokens)</h4>
+                    <pre>users[3]{id,name,role}:
+    1,Alice,admin
+    2,Bob,user
+    3,Charlie,user</pre>
+                </div>
+            </div>
+
+            <p class="comparison-note">
+                <em>🚀 Benchmarks show a 39.6% to 60% reduction in token usage for tabular data.
+                    (<a href="https://github.com/toon-format/toon?tab=readme-ov-file#benchmarks" target="_blank"
+                        style="color: inherit; text-decoration: underline;">Source</a>)</em>
+            </p>
+
+            <h3>Why Switch? The Benchmarks</h3>
+            <p>
+                Independent tests across 209 data retrieval tasks showed that TOON is not just smaller, it is often
+                clearer for models to understand.
+            </p>
+
+            <ul class="stats-grid">
+                <li
+                    style="background: rgba(34, 197, 94, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid var(--success-color);">
+                    <strong>30&#8211;60%</strong>
+                    Fewer Tokens
+                </li>
+                <li
+                    style="background: rgba(56, 189, 248, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid var(--accent-color);">
+                    <strong>73.9%</strong>
+                    Accuracy (vs 70.7% JSON)
+                </li>
+            </ul>
+
+            <h3>When to Use What?</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Use Case</th>
+                        <th>JSON</th>
+                        <th>TOON</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LLM Prompts &amp; Context</strong></td>
+                        <td>❌ Verbose &amp; Expensive</td>
+                        <td>✅ <strong>Recommended</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web APIs (REST/GraphQL)</strong></td>
+                        <td>✅ <strong>Standard</strong></td>
+                        <td>❌ Not yet supported</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Storage (Databases)</strong></td>
+                        <td>✅ Robust ecosystem</td>
+                        <td>❌ Use JSON for storage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Large, Repetitive Lists</strong></td>
+                        <td>❌ Wastes 50% space</td>
+                        <td>✅ <strong>Huge Savings</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>A Brief History of Data</h3>
+            <p>Data formats evolve to meet the needs of their time:</p>
+            <ul class="history-list">
+                <li><strong>INI Files:</strong> Simple, flat configurations.</li>
+                <li><strong>XML:</strong> Structured but incredibly verbose.</li>
+                <li><strong>JSON:</strong> The web standard. Readable but chatty.</li>
+                <li><strong>TOON:</strong> The AI standard. Optimized for tokens and machine reasoning.</li>
+            </ul>
+
+            <div class="cta-section">
+                <p>Ready to save tokens?</p>
+                <a href="index.html" class="btn-primary">Go to Converter</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "toonjson"
+version = "0.1.0"
+description = "Convert between JSON and TOON in Python."
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Your Name", email = "you@example.com" }
+]
+
+keywords = ["json", "toon", "llm", "tokens", "serialization"]
+
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/your-user/ToonJson"
+"Source"   = "https://github.com/your-user/ToonJson"
+"Funding"  = "https://www.buymeacoffee.com/santirbb"

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToonSwap | JSON &amp; TOON Converter</title>
+    <meta name="description"
+        content="Convert between JSON and TOON formats and estimate token savings for LLM prompts.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>JSON <span class="logo-arrow">⬌</span> TOON</h1>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item active">Converter</a>
+            <a href="about.html" class="nav-item">What is TOON?</a>
+            <a href="https://www.buymeacoffee.com/santirbb" target="_blank" rel="noopener noreferrer" class="btn-beer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 11h1a3 3 0 0 1 0 6h-1"></path>
+                    <path d="M9 13v6"></path>
+                    <path d="M13 13v6"></path>
+                    <path d="M7 10v9a3 3 0 0 0 3 3h3a3 3 0 0 0 3-3v-9"></path>
+                    <path d="M7 10V6a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v4"></path>
+                </svg>
+                <span>Buy me a beer</span>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="panel">
+            <div class="panel-header">
+                <span>JSON</span>
+                <div class="panel-header-actions">
+                    <span id="copyJsonMsg" class="copy-msg">Copied!</span>
+                    <button class="btn-secondary" type="button" onclick="pasteJsonSample()">Paste Sample</button>
+                    <button class="btn-secondary" type="button" onclick="copyJsonToClipboard()">Copy</button>
+                </div>
+            </div>
+
+            <textarea id="jsonInput" placeholder="Type or paste JSON here..." oninput="updateStats()"></textarea>
+
+            <div class="panel-footer">
+                <span id="jsonChars">0 chars</span>
+                <span id="jsonTokens">0 tokens</span>
+                <span id="jsonLines">0 lines</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="mode-selector">
+                <label for="modeSelect">Mode</label>
+                <select id="modeSelect">
+                    <option value="auto" selected>Auto-tabular (recommended)</option>
+                    <option value="strict">Strict TOON</option>
+                    <option value="jsonlike">JSON-like (no tables)</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" type="button" onclick="convert()">Convert &rarr;</button>
+            <button class="btn-secondary" type="button" onclick="reverseConvert()">&larr; Reverse</button>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <span>TOON</span>
+                <div class="panel-header-actions">
+                    <span id="savingsBadge" class="badge-success" style="display:none">0% Saved</span>
+                    <span id="copyMsg" class="copy-msg">Copied!</span>
+                    <button class="btn-secondary" type="button" onclick="pasteToonSample()">Paste Sample</button>
+                    <button class="btn-secondary" type="button" onclick="copyToonToClipboard()">Copy</button>
+                </div>
+            </div>
+
+            <textarea id="toonOutput" placeholder="Type or paste TOON here..." oninput="updateStats()"></textarea>
+
+            <div class="panel-footer">
+                <span id="toonChars">0 chars</span>
+                <span id="toonTokens">0 tokens</span>
+                <span id="toonLines">0 lines</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

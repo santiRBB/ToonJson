@@ -1,0 +1,6 @@
+users[2]{id,name}:
+  1,Alice
+  2,Bob
+roles[2]{role_id,role}:
+  1,manager
+  2,user
