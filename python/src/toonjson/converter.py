@@ -4,6 +4,7 @@ import csv
 import json
 import re
 from io import StringIO
+from pathlib import Path
 from typing import Any, Dict, List, Union
 
 JsonLike = Union[Dict[str, Any], List[Any]]
@@ -189,7 +190,6 @@ def json_to_toon(data: Union[str, JsonLike], mode: str = "auto") -> str:
 # ===================
 
 _HEADER_RE = re.compile(r"^(.+?)\[\d+\]\{([^}]*)\}:")
-
 _NUMBER_RE = re.compile(r"-?\d+(?:\.\d+)?$")
 
 
@@ -296,3 +296,38 @@ def toon_to_json(toon_str: str) -> JsonLike:
 
     # Nothing recognized as table
     return []
+
+
+# =========================
+# Convenience file helpers
+# =========================
+
+
+def json_file_to_toon(
+    path: Union[str, Path],
+    mode: str = "auto",
+    encoding: str = "utf-8",
+) -> str:
+    """
+    Read a JSON file from ``path`` and return its TOON representation.
+
+    This is a small convenience wrapper around ``json_to_toon``.
+    """
+    text = Path(path).read_text(encoding=encoding)
+    return json_to_toon(text, mode=mode)
+
+
+def toon_file_to_json(
+    path: Union[str, Path],
+    encoding: str = "utf-8",
+) -> JsonLike:
+    """
+    Read a TOON file from ``path`` and parse it into Python objects.
+
+    This is a small convenience wrapper around ``toon_to_json``.
+    """
+    text = Path(path).read_text(encoding=encoding)
+    return toon_to_json(text)
+
+
+# =========================

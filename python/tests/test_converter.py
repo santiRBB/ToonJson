@@ -1,6 +1,11 @@
 import json
 
-from toonjson import json_to_toon, toon_to_json
+from toonjson import (
+    json_to_toon,
+    toon_to_json,
+    json_file_to_toon,
+    toon_file_to_json,
+)
 
 
 def test_roundtrip_top_level_array():
@@ -83,3 +88,26 @@ def test_modes_do_not_crash():
             back = toon_to_json(toon)
             assert "logs" in back
             assert back["logs"] == data["logs"]
+
+
+def test_file_helpers(tmp_path):
+    data = {
+        "users": [
+            {"id": 1, "name": "Alice"},
+            {"id": 2, "name": "Bob"},
+        ]
+    }
+
+    # JSON file → TOON string
+    json_path = tmp_path / "data.json"
+    json_path.write_text(json.dumps(data), encoding="utf-8")
+
+    toon = json_file_to_toon(json_path)
+    assert "users[2]{id,name}:" in toon
+
+    # TOON file → Python object
+    toon_path = tmp_path / "data.toon"
+    toon_path.write_text(toon, encoding="utf-8")
+
+    back = toon_file_to_json(toon_path)
+    assert back == data

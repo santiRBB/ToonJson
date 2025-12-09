@@ -1,12 +1,13 @@
 # toonjson (Python)
 
-`toonjson` is a small Python library to convert between JSON and [TOON](https://github.com/toon-format/toon).  
+`toonjson` is a small Python library to convert between [JSON](https://www.json.org/json-en.html) and [TOON](https://github.com/toon-format/toon).  
 It is the backend companion of the JSON ⟷ TOON web playground and follows the same conversion rules and modes.
 
 Use it to:
 
 - Generate TOON from Python data structures before sending prompts to an LLM.
 - Parse TOON tabular output (e.g. `users[3]{id,name}: ...`) back into Python lists/dicts.
+- Work directly with JSON / TOON files from disk.
 - Experiment locally with the same behaviour as the web demo.
 
 ---
@@ -74,6 +75,22 @@ json_str = """
 toon = json_to_toon(json_str)
 items = toon_to_json(toon)  # returns a Python list
 ```
+
+## File helpers
+
+If you work with files a lot, you can skip the manual open() / read() boilerplate and use:
+
+```python
+from toonjson import json_file_to_toon, toon_file_to_json
+
+# JSON file → TOON string
+toon_text = json_file_to_toon("data/example.json", mode="auto")
+
+# TOON file → Python object (list or dict)
+obj = toon_file_to_json("data/example.toon")
+```
+
+These are thin wrappers around json_to_toon and toon_to_json, using UTF-8 by default.
 
 ## Conversion modes
 
